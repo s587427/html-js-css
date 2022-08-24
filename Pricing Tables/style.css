@@ -1,0 +1,260 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: rgba(38,0,51,.3);
+    padding: 20px;
+}
+
+.wrapper {
+    width: 100%;
+    max-width: 1090px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: auto;
+}
+
+
+.wrapper .table {
+    width: calc(33% - 20px);
+    background-color: #fff;
+    padding: 20px;
+    position: relative;
+}
+
+@media (max-width: 960px) {
+    .wrapper .table {
+        width: calc(50% - 20px);
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 640px) {
+    .wrapper .table {
+        width: 100%;
+    }
+}
+
+.table .price-section {
+    display: flex;
+    justify-content: center;
+}
+
+.price-section .price-area {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    padding: 2px;
+}
+
+
+.price-area .inner-area {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    color: #fff;
+    text-align: center;
+    line-height: 117px;
+    position: relative;
+    user-select: none;
+}
+
+.inner-area .text {
+    font-size: 25px;
+    font-weight: 400;
+    position: absolute;
+    top: -10px;
+    left: 17px;
+}
+
+.inner-area .price {
+    font-size: 45px;
+    font-weight: 500;
+    margin-left: 4px;
+}
+
+.table .package-name {
+    width: 100%;
+    height: 2px;
+    margin: 35px 0;
+    position: relative;
+}
+
+.table .package-name::before {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    font-size: 25px;
+    font-weight: 500;
+    padding: 0 15px;
+}
+
+.table .features li {
+    margin-bottom: 15px;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+.features li .list-name {
+    font-size: 17px;
+    font-weight: 400;
+}
+
+.features li .icon {
+    font-size: 15px;
+}
+
+.features li .icon.check {
+    color: rgba(124,252,0, 1);
+}
+
+.features li .icon.cross {
+    color: #cd3241;
+}
+
+.table .btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 35px;
+}
+
+.table .btn button {
+    width: 80%;
+    height: 50px;
+    color: #fff;
+    border-radius: 30px;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    /* outline: none; */
+    transition: all .4s;
+}
+
+.btn button:hover {
+    border-radius: 5px;
+}
+
+.basic li span::selection {
+    background-color: rgba(255, 182, 185, 1);
+    color: #fff;
+}
+
+.basic .price-area,
+.basic .inner-area,
+.basic .package-name {
+    background-color: rgba(255, 182, 185, 1);
+}
+
+.basic .btn button {
+    background-color: #fff;
+    border: 2px solid rgba(255, 182, 185, 1);
+    color: rgba(255, 182, 185, 1);
+}
+
+.basic .btn button:hover {
+    color: #fff;
+    background-color: rgba(255, 182, 185, 1);
+}
+
+.premium li span::selection {
+    background-color: rgba(187, 222, 214, 1);
+    color: #fff;
+}
+
+.premium .price-area,
+.premium .inner-area,
+.premium .package-name,
+.premium .btn button {
+    background-color: rgba(187, 222, 214, 1);
+}
+
+.ultimate li span::selection {
+    background-color: rgba(138, 198, 209, 1);
+    color: #fff;
+}
+
+.ultimate .price-area,
+.ultimate .inner-area,
+.ultimate .package-name,
+.ultimate .btn button {
+    background-color: rgba(138, 198, 209, 1);
+}
+
+.basic .package-name::before {
+    content: "Basic";
+}
+
+.premium .package-name::before {
+    content: "Premium";
+}
+
+.ultimate .package-name::before {
+    content: "Ultimate";
+}
+
+.table .ribbon {
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    overflow: hidden;
+}
+
+.table .ribbon::before,
+.table .ribbon::after {
+    position: absolute;
+    content: "";
+    display: block;
+    border: 7px solid rgba(0, 0, 0, .3);
+    
+    /* 將上 左邊框設置透明顏色 */
+    border-top-color: transparent;
+    border-left-color: transparent;
+    z-index: -1;
+}
+
+.table .ribbon::before{
+    /* 根據 ribbon區塊做定位 */
+    top: 0px;
+    right: 16px;
+}
+
+.table .ribbon::after{
+    /* 根據 ribbon區塊做定位 */
+    bottom: 16px ;
+ 
+}
+
+.table .ribbon span {
+    background-color: rgba(187, 222, 214, 1);
+    width: 200px;
+    padding: 10px 0;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, .15);
+    /* 根據ribon 父層定位 */
+    position: absolute;
+    top: 30px;
+    right: 0px;
+    transform: rotate(-45deg);
+}

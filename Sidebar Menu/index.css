@@ -1,0 +1,108 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: grey;
+}
+
+#sidebar {
+    position: fixed;
+    left: -300px;
+    width: 300px;
+    background-color: rgba(249, 188, 221, 1);
+    height: 100vh;
+    padding: 10px;
+    z-index: 2;
+
+    transition: all .5s ease;
+}
+
+#sidebar-header {
+    padding-left: 1rem;
+}
+
+#sidebar-header #brand {
+    text-align: center;
+    font-size: 36px;
+    color: white;
+}
+
+#sidebar-header span {
+    font-size: 24px;
+    color: white;
+}
+
+#sidebar ul {
+    list-style: none;
+    margin-top: 1rem;
+    padding: 0 1rem;
+}
+
+#sidebar ul li {
+    transition: all .5s ease;
+}
+
+#sidebar ul li:hover {
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+
+#sidebar ul li i {
+    font-size: 20px;
+    color: white;
+}
+
+#sidebar ul li a {
+    line-height: 60px;
+    text-decoration: none;
+    color: white;
+    margin-left: 10px;
+    font-weight: 400;
+    border-top: 1px solid rgba(182,137,176,1);
+    
+}
+
+#check {
+    display: none;
+}
+
+#btn i {
+    color: white;
+}
+
+#btn #open,
+#btn #close {
+    position: absolute;
+    z-index: 999;
+}
+
+#btn #open {
+    left: 50px;
+    font-size: 30px;
+    transition: all .6s ease;
+}
+
+#btn #close {
+    left: -270px;
+    font-size: 30px;
+    transition: all .6s ease;
+}
+
+
+#check:checked~#sidebar {
+    left: 0px;
+}
+
+#check:checked~#btn #open {
+    left: 270px;
+    opacity: 0;
+}
+
+#check:checked~#btn #close {
+    left: 270px;
+}

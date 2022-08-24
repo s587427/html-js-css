@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+* {
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+:root {
+    --primary-bg-light: 300, 76%, 91%;
+    --primary-bg: 300, 76%, 50%;
+    --primary-bg-dark: 300, 76%, 6%;
+}
+
+.bg-container {
+    height: 100vh;
+    background-image: url(./bg-img.jpg);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container {
+    --color: hsl(var(--primary-bg-dark), .7);
+    background-color: var(--color);
+    box-shadow: 0 0 15px var(--color);
+    padding: 40px;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 20px;
+}
+
+.login-container h1 {
+    color: white;
+    text-align: center;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+
+.login-container .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.login-form .input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.input-group label {
+    color: white;
+    font-weight: bolder;
+    font-size: 1.3rem;
+}
+
+.input-group input {
+    background-color: hsl(var(--primary-bg-light), .7);
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    height: 35px;
+    font-size: 1.25rem;
+    padding-left: 8px;
+    color: white;
+    font-weight: lighter;
+}
+
+.input-group.success input:focus, .input-group.error input:focus {
+   box-shadow: 0 0 0 1.5px hsl(var(--primary-bg));
+}
+
+.input-group.success input {
+    box-shadow: 0 0 0 1.5px greenyellow;
+}
+.input-group.error input {
+    box-shadow: 0 0 0 1.5px rgba(228,23,73,1);
+}
+
+.input-group span{
+    padding-left: 4px;
+    display: none;
+    font-size: 0.7rem;
+    font-weight: bolder;
+}
+
+.input-group.success span{
+    color: greenyellow;
+    display: block;
+}
+
+.input-group.error span{
+    color: rgba(228,23,73,1);
+    display: block;
+}
+
+
+.login-form button {
+    font-size: 1.5rem;
+    font-weight: lighter;
+    padding: 10px;
+    color: white;
+    outline: none;
+    border: 1px solid hsl(var(--primary-bg));
+    border-radius: 8px;
+    background-color: hsl(var(--primary-bg), .25);
+}
+
+.login-form button:hover {
+   cursor: pointer;
+   background-color: hsl(var(--primary-bg), .4);
+}
