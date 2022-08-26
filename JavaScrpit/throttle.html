@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>節流</title>
+</head>
+
+<body style="height: 80vh; background-color: #fff;">
+    <h1 style="text-align: center">節流(throttle)</h1>
+</body>
+
+</html>
+
+<script>
+    const bodyEl = document.querySelector('body')
+    window.addEventListener('resize', throttle(setBackGroudColor, 200))
+    function throttle(callback, delay) {
+        let timer = null
+        return function () {
+            //console.log({timer})
+            if(timer) return
+            timer = setTimeout(() => {
+                callback.apply(this, arguments)
+                timer = null
+            }, delay)
+        }
+    }
+
+    function setBackGroudColor() {
+        // console.log(arguments)
+        const redNum = getRandomInt(255),
+            greenNum = getRandomInt(255),
+            BlueNum = getRandomInt(255)
+        bodyEl.style.backgroundColor = `rgba(${redNum},${greenNum},${BlueNum},1)`
+    }
+
+    function getRandomInt(max) {
+        return Math.ceil(Math.random() * max)
+    }
+</script>
