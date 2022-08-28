@@ -9,9 +9,9 @@
 
 
 :root {
-    --primary-bg-light: 300, 76%, 91%;
-    --primary-bg: 300, 76%, 50%;
-    --primary-bg-dark: 300, 76%, 6%;
+    --primary-bg-light: 33, 76%, 91%;
+    --primary-bg: 33, 76%, 50%;
+    --primary-bg-dark: 33, 76%, 6%;
 }
 
 .bg-container {
