@@ -1,0 +1,119 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    /* 設定以下可達到內容垂直水平置中
+    
+    display: grid;
+    place-items: center; place-items 此屬性是 align-items 與 justify-items 的縮寫
+    */ 
+    display: grid;
+    place-items: center;
+    height: 100%;
+    background-color: #f2f2f2;
+    text-align: center; 
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card {
+    height: 290px;
+    max-width: 350px;
+    margin: 0 20px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, .2);
+    transition: .4s;
+    background-color: white;
+}
+
+.card:hover {
+    height: 540px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, .2);
+}
+
+.card .img {
+    height: 200px;
+    width: 100%;
+}
+
+.card .img img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.card .top-text {
+    padding: 5px;
+}
+
+.card .top-text .name {
+    font-size: 25px;
+    font-weight: 600;
+    color: #202020;
+}
+
+.card .top-text p {
+    font-size: 20px;
+    font-weight: 600;
+    color: #e74c3c;
+    line-height: 20px;
+}
+
+.card .bottom-text {
+    padding: 0 20px 10px 20px;
+    margin-top: 5px;
+    background: white;
+    opacity: 0;
+    visibility: hidden;
+    transition: .1s;
+}
+
+.card:hover .bottom-text {
+    opacity: 1;
+    visibility: visible;
+}
+
+.card .bottom-text .text {
+    /* 使左右對齊本文 */
+    text-align: justify;
+}
+
+.card .bottom-text .btn {
+    margin: 10px 0;
+    text-align: left;
+}
+
+.card .bottom-text .btn a {
+    text-decoration: none;
+    background: #e74c3c;
+    color: #f2f2f2;
+    padding: 5px 8px;
+    border-radius: 3px;
+    /* 寬高包含子項目 */
+    display: inline-flex; 
+    transition: .2s;
+}
+
+.card .bottom-text .btn a:hover {
+    transform: scale(.9);
+}
+
+
+@media (max-width: 978px) {
+    .container{
+        flex-wrap: wrap;
+        flex-direction: column;
+        padding: 0 40px;
+    }
+    .card{
+        max-width: 700px;
+        margin: 20px 0;
+    }
+}
