@@ -1,12 +1,7 @@
+//新增
 const articleFileUpload = document.querySelector('#articleFileUpload')
-const articleImagePreview = document.querySelector('#articleImagePreview')
 const articleUploadBtn = document.querySelector('#articleUploadBtn')
-const aricleBtnSave = document.querySelector('#aricleBtnSave')
 const articleForm = document.querySelector('#articleForm')
-const articleModal = new bootstrap.Modal(document.getElementById('addArticle'), { keyboard: false })
-const sel_Zone = document.querySelector('#sel_Zone')
-const txt_Title = document.querySelector('#txt_Title')
-const txt_descr = document.querySelector('#txt_descr')
 
 //圖片預覽
 articleFileUpload.addEventListener('change', e => {
@@ -17,6 +12,7 @@ articleFileUpload.addEventListener('change', e => {
     //e.target.files; // FileList object
     // e.target.files[0]; // File Object (Special Blob)
     console.log(e.target.files)
+    const articleImagePreview = document.querySelector('#articleImagePreview')
     articleImagePreview.src = window.URL.createObjectURL(e.target.files[0]); // 取得檔案
 })
 
@@ -27,10 +23,13 @@ articleUploadBtn.addEventListener('click', () => {
     alert('post data to server...')
 })
 
-//保存
+//新增
 articleForm.addEventListener('submit', (e) => {
     e.preventDefault()
-    alert('post data to server')
+    const sel_Zone = document.querySelector('#sel_Zone'),
+        txt_Title = document.querySelector('#txt_Title'),
+        txt_descr = document.querySelector('#sel_Zone')
+    const articleModal = new bootstrap.Modal(document.getElementById('addArticle'), { keyboard: false })
     const data = {
         key: Date.now(),
         txt_Title: txt_Title.value,
@@ -39,8 +38,79 @@ articleForm.addEventListener('submit', (e) => {
         file: articleFileUpload.files.length ? articleFileUpload.files[0] : null,
     }
     console.log({ data })
+    alert('post data to server')
     // articleModal.hide()
     // sel_Zone.selectedIndex = 0
     // txt_Title.value = null
     // txt_descr.value = null
 })
+
+//更新
+const editArticleForm = document.querySelector('#editArticleForm')
+editArticleForm.addEventListener('submit', (e) => {
+    e.preventDefault()
+    const zone = editArticleModalEl.querySelector('#edit_sel_Zone'),
+        title = editArticleModalEl.querySelector('#edit_txt_Title'),
+        tag = editArticleModalEl.querySelector('#edit_txt_Tag'),
+        content = editArticleModalEl.querySelector('#edit_txt_descr'),
+        file = editArticleModalEl.querySelector('#editArticleFileUpload'),
+        prviewImg = editArticleModalEl.querySelector('#editeditArticleImagePreview'),
+        btnUpdate = editArticleModalEl.querySelector('#editAricleBtnSave')
+    
+    alert('update to serve')
+})
+
+//編輯dialog
+const editArticleModal = new bootstrap.Modal(document.getElementById('editArticle'), {
+    backdrop: 'static',
+    keyboard: true,
+    focus: true,
+})
+const editArticleModalEl = document.getElementById('editArticle')
+
+
+function operateFormatter(value, row, index) {
+    return `
+        <button 
+            class="btn btn-warning edit" 
+            type="button" 
+        >
+            編輯
+        </button>
+        <button class="btn btn-danger remove" type="button">刪除</button>
+    `
+}
+
+
+
+window.operateEvents = {
+    'click .edit': function (e, value, row, index) {
+        const zone = editArticleModalEl.querySelector('#edit_sel_Zone'),
+            title = editArticleModalEl.querySelector('#edit_txt_Title'),
+            tag = editArticleModalEl.querySelector('#edit_txt_Tag'),
+            content = editArticleModalEl.querySelector('#edit_txt_descr'),
+            file = editArticleModalEl.querySelector('#editArticleFileUpload'),
+            prviewImg = editArticleModalEl.querySelector('#editeditArticleImagePreview'),
+            btnUpdate = editArticleModalEl.querySelector('#editAricleBtnSave')
+        console.log({ zone, title, tag, content, file, prviewImg, btnUpdate })
+
+        editArticleModal.show()
+    },
+    'click .remove': function (e, value, row, index) {
+        if (!confirm('你確定要刪除嗎?!')) return false;
+        // $.ajax({
+        //     type:'post',
+        //     url: '456456',
+        //     data: row,
+        //     success:e=>{                
+        //         console.log(e);
+        //         $table.bootstrapTable('refresh');                                                          
+        //     },
+        //     error:e=>{
+        //         console.log(e);
+        //         alert('操作失敗');
+        //     }
+
+        // });     
+    }
+}

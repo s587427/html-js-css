@@ -13,15 +13,48 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">
         </script>
+
+    <!-- 表格套件 -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.21.1/dist/bootstrap-table.min.css">
+    <script src="https://unpkg.com/bootstrap-table@1.21.1/dist/bootstrap-table.js"></script>
+
+    <!-- 自己寫的 -->
     <script src="add.js" defer></script>
 </head>
 
-<body>
-
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addArticle">
-        新增
-    </button>
+<body class="d-flex justify-content-center">
+    <div class="container bg-body border p-3 mt-5 shadow-sm rounded m-3">
+        <h1 class="mb-3">文章管理</h1>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addArticle">
+            添加
+        </button>
+        <table class="table bg-light mt-3" data-toggle="table">
+            <thead>
+                <tr>
+                    <th data-field="source">站台</th>
+                    <th data-field="title">標題</th>
+                    <th data-field="tag">標籤</th>
+                    <th data-field="price" data-formatter="operateFormatter" data-events="operateEvents">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Item 1</td>
+                    <td>1</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Item 2</td>
+                    <td>2</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
     <!-- Modal -->
     <div class="modal fade" id="addArticle" tabindex="-1" aria-labelledby="addArticleLabel" aria-hidden="true"
@@ -29,7 +62,7 @@
         <div class="modal-dialog modal-dialog-scrollable modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addArticleLabel">新增修改文章</h5>
+                    <h5 class="modal-title" id="addArticleLabel">添加文章</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -38,7 +71,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="input-group mb-3">
-                                        <label class="input-group-text" for="inputGroupSelect01">專區</label>
+                                        <label class="input-group-text" for="inputGroupSelect01">站台</label>
                                         <select class="form-select" id="sel_Zone" required>
                                             <option value="" disabled selected>Choose...</option>
                                             <option value="1">一杯茶</option>
@@ -69,6 +102,16 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="input-group mb-3">
+                                        <span class="input-group-text">標籤</span>
+                                        <input id="txt_Tag" type="text" class="form-control" placeholder="請輸入標題..."
+                                            aria-label="請輸入標籤..." aria-describedby="txt_Tag" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-group mb-3">
                                         <span class="input-group-text">內容</span>
                                         <textarea class="form-control" aria-label="With textarea" required
                                             placeholder="請輸入內容..." id="txt_descr"></textarea>
@@ -79,7 +122,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="input-group mb-3">
-                                        <input type="file" class="form-control" id="articleFileUpload"
+                                        <input type="file" class="form-control FileUpload" id="articleFileUpload"
                                             aria-describedby="articleUploadBtn" aria-label="Upload">
                                         <button class="btn btn-outline-secondary" type="button"
                                             id="articleUploadBtn">上傳</button>
@@ -96,12 +139,104 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" form="articleForm" class="btn btn-primary" id="aricleBtnSave">Save</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+                    <button type="submit" form="articleForm" class="btn btn-primary" id="aricleBtnSave">新增</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="editArticle" tabindex="-1" aria-labelledby="editArticleLabel" aria-hidden="true"
+        data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-scrollable modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editArticleLabel">更新文章</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="" id="editArticleForm" class="was-validated">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-group mb-3">
+                                        <label class="input-group-text" for="inputGroupSelect01">站台</label>
+                                        <select class="form-select" id="edit_sel_Zone" required>
+                                            <option value="" disabled selected>Choose...</option>
+                                            <option value="1">一杯茶</option>
+                                            <option value="2">小花仙</option>
+                                            <option value="3">慾茶園</option>
+                                            <option value="4">甜心小鋪</option>
+                                            <option value="5">奶茶妹</option>
+                                            <option value="6">睡美人</option>
+                                            <option value="7">米奇</option>
+                                            <option value="8">水仙</option>
+                                            <option value="9">甄姬</option>
+                                            <option value="10">貂蟬</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">標題</span>
+                                        <input id="edit_txt_Title" type="text" class="form-control"
+                                            placeholder="請輸入標題..." aria-label="請輸入標題..." aria-describedby="txt_Title"
+                                            required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">標籤</span>
+                                        <input id="edit_txt_Tag" type="text" class="form-control" placeholder="請輸入標題..."
+                                            aria-label="請輸入標籤..." aria-describedby="txt_Tag" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">內容</span>
+                                        <textarea class="form-control" aria-label="With textarea" required
+                                            placeholder="請輸入內容..." id="edit_txt_descr"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-group mb-3">
+                                        <input type="file" class="form-control FileUpload" id="editArticleFileUpload"
+                                            aria-describedby="articleUploadBtn" aria-label="Upload">
+                                        <button class="btn btn-outline-secondary" type="button"
+                                            id="articleUploadBtn">上傳</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <img src="" id="editeditArticleImagePreview" class="img-thumbnail" alt="尚無預覽圖">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+                    <button type="submit" form="editArticleForm" class="btn btn-primary"
+                        id="editAricleBtnSave">更新</button>
                 </div>
             </div>
         </div>
     </div>
 </body>
+
 
 </html>
