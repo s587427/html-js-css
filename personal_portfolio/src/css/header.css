@@ -1,0 +1,36 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 7.5vh;
+    background: white;
+    padding: 0px 16px;
+    box-shadow: 0px 0px 5px rgba(255, 255 ,255 .7);
+}
+
+.header .header-banner{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: black;
+    height: 55px;
+    width: 55px;
+    border-radius: 50%;
+}
+
+.header-banner span{
+    color: white;
+}
+
+.header-list ul{
+    display: flex;
+    list-style: none;
+    width: 100%;
+}
+
+.header-list ul li{
+   margin: 0px 16px;
+   cursor: pointer;
+   font-size: 18px;
+   font-weight: 600;
+}
