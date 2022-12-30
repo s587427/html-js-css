@@ -1,16 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Module測試</title>
-    <script type="module" src="./js/index.js" defer></script>
-    
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 </head>
-<body> 
+
+<body>
     <button class="btn">click</button>
 </body>
 
 
 </html>
+
+<style>
+    .li-have-ul {
+        position: relative;
+    }
+
+    .li-have-ul::after {
+        position: absolute;
+        content: '>';
+        left: 125px;
+        top: 0px;
+       
+    }
+</style>
+
+<script type="module">
+    import { directory } from './data.js'
+
+
+    const result = ggenerateDirectory(2, 4, 4)
+
+    $('body').append(result)
+
+
+    function generateDirectory(nowLevel, maxLevel, PCID) {
+        if (nowLevel > maxLevel) return ''
+
+        return `<ul>
+        ${directory
+                .filter(d => d.nLevel === nowLevel && d.PCID === PCID)
+                .map(d => {
+                    return `<li class="${checkExistNextLevel(d.CID) ? 'li-have-ul' : ''}">${d.CName}${getNestedDirectory(nowLevel + 1, maxLevel, d.CID)}</li>`
+                })
+                .join('\n')}
+        </ul>`
+    }
+    function checkExistNextLevel(CID) {
+        return directory.filter(d => d.PCID === CID).length
+    }
+</script>

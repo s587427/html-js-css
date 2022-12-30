@@ -6,36 +6,121 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
-    <style>
-        .box {
-            width: 500px;
-            height: 250px;
-            border: 1px solid #f00;
-            margin: auto;
-            display: grid;
-            place-items: center;
-            height: 150px;
-            margin: 0 auto;
-        }
-
-        .content {
-            width: 400px;
-            background: #ccc;
-        }
-    </style>
 </head>
 
 <body>
-    <div class="box box16">
-        <div class="content">
-            立馬來看 Amos 實際完成的
-            <a href="http://csscoke.com/2015/07/31/nth-child_rwd_album/">
-                CSS3精美相簿效果
-            </a>
-            效果吧！別忘了拖拉一下視窗看看 RWD 效果喔！
-        </div>
-    </div>
+    <label for="">檔案上傳</label>
+    <input type="file" id="file">
+
+    <form action="" id="test_form">
+        <input type="text" name="age" id="">
+        <input type="checkbox" name="checkboxs" id="" value="2">
+        <input type="checkbox" name="checkboxs" id="" value="3">
+        <input type="radio" name="radios" value="1">
+        <input type="radio" name="radios" value="2">
+        <input type="date" name="dates">
+        <select name="sel_hobby" id="">
+            <option value="0">睡覺</option>
+            <option value="1">抽菸</option>
+        </select>
+        <textarea name="txt_desc" id="" cols="30" rows="10"></textarea>
+        <button type="submit">test_btn</button>
+
+        <input id="f" type="file" multiple>
+    </form>
+
+
 </body>
 
 </html>
+
+<script>
+
+
+    let a = [{name: '123'}]
+    let b
+    
+    b = JSON.parse(JSON.stringify(a))
+    b[0].src = '123'
+
+    console.log(a, b)
+
+    
+
+
+
+
+    document.querySelector('#f').addEventListener('change', (e) => {
+        console.log(e)
+    })
+
+    const formEl = document.querySelector('#test_form')
+    formEl.addEventListener('submit', (e) => {
+        e.preventDefault()
+        const { sel_hobby } = e.target
+        console.log(e)
+    })
+
+    const fileEl = document.querySelector('#file')
+    fileEl.addEventListener('change', (e) => {
+        let originalFile = e.target.files[0]
+        console.log({ originalFile })
+        let reader = new FileReader()
+        // 監聽FileReader讀取照片
+        reader.addEventListener('load', (e) => {
+
+            //經過FileReader讀取照片的照片編碼轉為base64
+            const src = e.target.result
+            console.log({ base64: src })
+            //base64處理
+            console.log(compressImage(src))
+
+        })
+        // FileReader讀取照片
+        reader.readAsDataURL(originalFile)
+    })
+
+    function compressImage(src, type = 'image/jpeg', encoderOptions = 0.1) {
+        const image = new Image()
+        image.src = src
+        //console.log({ image })
+
+
+        image.onload = function () {
+            const canvas = document.createElement('canvas')
+            // 拿起畫筆
+            const ctx = canvas.getContext('2d')
+
+            //讀取原始圖片尺寸
+            const imgW = image.width, imgH = image.height
+
+            // 指定輸出圖片尺寸, 按比例，比如限制寬是1024
+            const modifyW = imgW, modifyH = imgH
+
+            // 畫布大小
+            canvas.width = modifyW //imgW
+            canvas.height = modifyH //imgH
+
+            // 畫上去
+            // 壓縮到指定尺寸
+            ctx.drawImage(image, 0, 0, modifyW, modifyH)  //0, 0左上角座標起點
+
+            // 回傳含有圖像和參數設置特定格式的 base64 
+            const compressBase64 = canvas.toDataURL(type, encoderOptions)
+            console.log({ compressBase64, size: (compressBase64.length * (3 / 4)) })
+
+            const compressimgEl = document.createElement('img')
+            compressimgEl.src = compressBase64
+            document.querySelector('body').appendChild(compressimgEl)
+
+            // 傳成blob
+            canvas.toBlob(function (blob) {
+                console.log({ compressBlob: blob })
+            }, type, encoderOptions)
+
+        }
+
+    }
+
+
+</script>

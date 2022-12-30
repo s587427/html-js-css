@@ -38,3 +38,30 @@
 </body>
 </html>
 
+<script>
+
+    const ObserverConatiner = document.querySelector(".imgWrap")
+
+    getData()
+    .then(res =>{
+        console.log(res)
+        res.forEach((item, index)=>{
+            fileName = item.json_file.replace(/\[|\]|"/g, "")
+            let imgElement = document.createElement("img")
+            imgElement.className = "skeletom"
+            imgElement.setAttribute("data-src", `https://kiss66.net/kiss66/uploads/${fileName}`)
+            ObserverConatiner.appendChild(imgElement)
+            console.log("doing")
+        })
+        runObserver()
+    })
+
+    async function getData(){
+        const result = await fetch("https://kiss66.net/kiss66/api/ApiGetNews")
+        const dataJson = await result.json()
+        return dataJson     
+    }
+
+</script>
+
+

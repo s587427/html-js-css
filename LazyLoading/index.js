@@ -15,16 +15,19 @@ const observeCallBack = (entries, observe) => {
 }
 
 const options = {
-    root: document.querySelector('.imgWrap'),
+    root: null,
     threshold: 0.25, //可見程度
 }
 
 const intersectionObserver = new IntersectionObserver(observeCallBack, options)
-const imgsElement = document.querySelectorAll('.imgWrap img')
 
-imgsElement.forEach(img => {
-    intersectionObserver.observe(img)
-})
+
+function runObserver(){
+    const imgsElement = document.querySelectorAll('.imgWrap img')
+    imgsElement.forEach(img => {
+        intersectionObserver.observe(img)
+    })
+}
 
 /*
     Intersection Obeserver API 
